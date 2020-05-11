@@ -285,8 +285,8 @@ void mod(string cod, string desc){
 		remove(nombre_archivo);
 		rename(nombre_auxiliar,nombre_archivo);
 		cout<<"Registro Modificado de forma exitosa"<<endl<<endl<<endl;
+		mostrar();	
 		system("pause");
-		mostrar();
 		valoresIniciales();
 	}
 } 
