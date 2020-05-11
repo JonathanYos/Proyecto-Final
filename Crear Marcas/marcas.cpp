@@ -10,7 +10,7 @@ void opcionSeleccionada(int);
 void Ingresar();
 void Modificar();
 void Eliminar();
-
+void mostrar();
 int Cuenta(string s, const char Separadorr, int &TotalChars) {
     for (int i = 0; i < s.size(); i++)
         if (s[i] == Separadorr) TotalChars++;
@@ -44,15 +44,14 @@ int Cuenta(string s, const char Separadorr, int &TotalChars) {
     }
 }
 //la direccion del archivo para almacenar y hacer cambios
-const char *nombre_archivo="../Base de Datos/marcas.txt";
-
-void ingresar();
-void modificar();
-void eliminar();
+const char *nombre_archivo="../Base de Datos/Marcas.txt";
+const char *nombre_auxiliar="../Base de Datos/MarcasAux.txt";
 bool esNumerico(string); 
 bool VeririficarRepetido(string);
 void ingresar_marcaArchivo(string,string);
 void valoresIniciales();
+void mod(string,string);
+void eli(string);
 int main() 
 {	
 //	Creamos una funcion llamada valoresIniciales que es el menu y las opciones
@@ -72,10 +71,10 @@ void opcionSeleccionada(int op){
 			 Ingresar();
 		break;
 		case 2:
-			void modificar();
+			 Modificar();
 		break;
 		case 3:
-			void eliminar();
+			 Eliminar();
 		break;
 		default:
 			cout<<"Opcion no valida";
@@ -98,13 +97,13 @@ void Ingresar(){
 	cin>>desc;
 	//Funcion que verifica si es numero
 	if(esNumerico(codig)){
-		//if(VeririficarRepetido(codig)){
-		//	cout<<"Error-- Ya ha utilizado este codigo"<<endl;
-		//	system("pause");
-		//	Ingresar();
-		//}else{	
+		if(VeririficarRepetido(codig)){
+			cout<<"Error-- Ya ha utilizado este codigo"<<endl;
+			system("pause");
+			Ingresar();
+		}else{	
 			 ingresar_marcaArchivo(codig,desc);
-		//}
+		}
 	}
 	else{
 		cout<<"Error-- el codigo debe ser numerico"<<endl;
@@ -112,37 +111,62 @@ void Ingresar(){
 		Ingresar();
 	}
 }
-void modificar(){
-	
+void Modificar(){
+ system("cls");
+ string codig,ncodig;
+ mostrar();	
+ cout<<"Ingrese el codigo que desea modificar"<<endl;
+ cin>>codig;
+ cout<<"Ingrese el nuevo nombre"<<endl;
+ cin>>ncodig;
+ if(VeririficarRepetido(codig)){
+ 	mod(codig,ncodig);
+ }else{
+ 	cout<<"Error-- El codigo no existe"<<endl;
+ 	system("pause");
+	Modificar();
+ } 
 }
-void eliminar(){
-	
+void Eliminar(){
+ system("cls");
+ string codig;
+ mostrar();	
+ cout<<"Ingrese el codigo que desea eliminar"<<endl;
+ cin>>codig;
+ if(VeririficarRepetido(codig)){
+ 	eli(codig);
+ }else{
+ 	cout<<"Error-- El codigo no existe"<<endl;
+ 	system("pause");
+	Modificar();
+ } 	
 }
 void ingresar_marcaArchivo(string cod,string desc){
 	ofstream archivo;
 	char continuar;
 	archivo.open(nombre_archivo,ios::app);
+	
 	if(archivo.fail()){
 	cout<<"Error de archivo";
-}else
-{
+	}else
+	{
+	
 	fflush(stdin);
 	system("cls");
-	archivo<<cod<<" "<<desc<<endl;
+	archivo<<endl<<cod<<" "<<desc;
 	cout<<"Registro Guardado exitosamente"<<endl;
 	cout<<"¿Continuar s/n?"<<endl;
 	cin>>continuar;
 	archivo.close();
-	if(continuar=='s'||continuar=='S'){
-	Ingresar();		
-	}else{
-	valoresIniciales();
+		if(continuar=='s'||continuar=='S'){
+			Ingresar();		
+		}else{
+			valoresIniciales();
+		}
 	}
-	
-}
 }
 bool VeririficarRepetido(string codi){
-	int  conteo;
+	int conteo;
 	ifstream archivo;
 	string contenido;
 	archivo.open(nombre_archivo,ios::in);
@@ -150,14 +174,14 @@ bool VeririficarRepetido(string codi){
 		cout<<"Error de archivo"<<endl;
 		exit(1);
 	}else{
-		system("cls");
-		do{
-			//obtengo la fila del archivo y la almaceno en la variable
+		while(archivo.eof()==false){
+		//obtengo la fila del archivo y la almaceno en la variable
 			//contenido
-			getline(archivo,contenido);
-			
-			    vector<string> TempBuff(0);
-			    //creo un array para almacenar todos los string
+				getline(archivo,contenido);
+			    if(contenido=="" || contenido==" "){
+				}else{
+				vector<string> TempBuff(0);
+				//creo un array para almacenar todos los string
 			    int TotalVector;
 				//TotalVector almacena la cantidad de palabras almacenadas
 				split(contenido, *" ",  TempBuff, TotalVector);
@@ -167,8 +191,11 @@ bool VeririficarRepetido(string codi){
 					conteo++;
 					//si es asi creamos un contador
 				}
-		}while(archivo.eof()==false);
+				}
+					
+		}
 		//va a hacer en todas las filas del archivo
+		
 	}
 	archivo.close();
 	//Cierra el archivo
@@ -182,7 +209,6 @@ bool VeririficarRepetido(string codi){
 }
 bool esNumerico(string linea) 
 {
-	
    bool b = true;
    int longitud = linea.size();
  
@@ -207,8 +233,80 @@ bool esNumerico(string linea)
    }
    return b;
 }
+void mostrar(){
+	
+}
+void mod(string cod, string desc){
+	ofstream aux;
+	ifstream archivo;
+	char Salir;
+	string contenido;
+	bool encontrado = false;
+	
+	archivo.open(nombre_archivo,ios::in);
+	aux.open(nombre_auxiliar,ios::out);
+	
+	if(archivo.fail()){
+		cout<<"Archivo no encontrado"<<endl;
+		exit(1);
+	}else{		
+		system("cls");
+		do{
+			getline(archivo,contenido);
+			if(contenido.find(cod) != std::string::npos)
+			{
+			aux<<cod<<" "<<desc<<endl;
+			}
+			else{
+				aux<<contenido<<endl;
+			}
+			
+		}while(archivo.eof()==false);
+		archivo.close();
+		aux.close();
+		remove(nombre_archivo);
+		rename(nombre_auxiliar,nombre_archivo);
+		cout<<"Registro Modificado de forma exitosa"<<endl<<endl<<endl;
+		system("pause");
+		mostrar();
+		valoresIniciales();
+	}
+} 
+void eli(string cod){
+	ofstream aux;
+	ifstream archivo;
+	char Salir;
+	string contenido;
+	bool encontrado = false;
+	
+	archivo.open(nombre_archivo,ios::in);
+	aux.open(nombre_auxiliar,ios::out);
+	
+	if(archivo.fail()){
+		cout<<"Archivo no encontrado"<<endl;
+		exit(1);
+	}else{		
+		system("cls");
+		do{
+			getline(archivo,contenido);
+			if(contenido.find(cod) != std::string::npos)
+			{
+			aux<<""<<endl;
+			}
+			else{
+				aux<<contenido<<endl;
+			}
+			
+		}while(archivo.eof()==false);
+		archivo.close();
+		aux.close();
+		remove(nombre_archivo);
+		rename(nombre_auxiliar,nombre_archivo);
+		cout<<"Registro Eliminado de forma exitosa"<<endl<<endl<<endl;
+		system("pause");
+		mostrar();
+		valoresIniciales();
+	}
+} 
 
-
-
-  
 
