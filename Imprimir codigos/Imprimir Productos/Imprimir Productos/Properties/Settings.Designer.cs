@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Caja_de_Supermercado.Properties
+namespace Imprimir_Productos.Properties
 {
 
 

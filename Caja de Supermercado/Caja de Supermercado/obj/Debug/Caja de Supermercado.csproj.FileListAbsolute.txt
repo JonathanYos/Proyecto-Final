@@ -1,2 +1,0 @@
-c:\users\jonathany\documents\visual studio 2015\Projects\Caja de Supermercado\Caja de Supermercado\bin\Debug\Caja de Supermercado.exe.config
-C:\Users\JonathanY\Desktop\Proyecto Final\Caja de Supermercado\Caja de Supermercado\bin\Debug\Caja de Supermercado.exe.config
