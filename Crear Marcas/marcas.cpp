@@ -234,7 +234,25 @@ bool esNumerico(string linea)
    return b;
 }
 void mostrar(){
-	
+	int conteo;
+	ifstream archivo;
+	string contenido;
+	archivo.open(nombre_archivo,ios::in);
+	if(archivo.fail()){
+		cout<<"Error de archivo"<<endl;
+		exit(1);
+	}else{
+		while(archivo.eof()==false){
+		//obtengo la fila del archivo y la almaceno en la variable
+			//contenido
+				getline(archivo,contenido);
+			    if(contenido=="" || contenido==" "){
+				}else{
+				cout<<contenido<<endl;
+				}
+				}
+		}
+		//va a hacer en todas las filas del archivo
 }
 void mod(string cod, string desc){
 	ofstream aux;
@@ -291,7 +309,7 @@ void eli(string cod){
 			getline(archivo,contenido);
 			if(contenido.find(cod) != std::string::npos)
 			{
-			aux<<""<<endl;
+			aux<<"";
 			}
 			else{
 				aux<<contenido<<endl;
