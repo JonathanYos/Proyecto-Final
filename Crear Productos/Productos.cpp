@@ -132,7 +132,7 @@ void Ingresar()
 	cin>>preciov;
 	//Funcion que verifica si es numero
 	if(esNumerico(codig)){
-		if(VeririficarRepetido(codig)){
+		if(VeririficarRepetido(codig)==false){
 			cout<<"Error-- Ya ha utilizado este codigo"<<endl;
 			system("pause");
 			Ingresar();
