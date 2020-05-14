@@ -3,6 +3,8 @@
 #include <vector>
 #include <stdio.h>
 #include <fstream>
+#include <stdio.h>
+#include <conio.h>
 
 using namespace std;
 void menu();
@@ -11,10 +13,35 @@ void Ingresar();
 void Modificar();
 void Eliminar();
 void mostrar();
+
+
+
+
 int Cuenta(string s, const char Separadorr, int &TotalChars) {
     for (int i = 0; i < s.size(); i++)
         if (s[i] == Separadorr) TotalChars++;
 	}
+
+
+void gotoxy(int x,int y){  
+      HANDLE hcon;  
+      hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
+      COORD dwPos;  
+      dwPos.X = x;  
+      dwPos.Y= y;  
+      SetConsoleCursorPosition(hcon,dwPos);  
+ 	}  
+
+void OcultarCursor()
+{
+	HANDLE hCon;
+	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor;
+	cursor.dwSize = 50;
+	cursor.bVisible = FALSE;
+	SetConsoleCursorInfo(hCon,&cursor);
+}
+
 
 	void split(string Linea, char Separador, vector<string> &TempBuff, int &TotalVector) {
     TempBuff.resize(0);
@@ -52,19 +79,34 @@ void ingresar_marcaArchivo(string,string);
 void valoresIniciales();
 void mod(string,string);
 void eli(string);
+
 int main() 
 {	
+	system ("color 70");
+
 //	Creamos una funcion llamada valoresIniciales que es el menu y las opciones
 	valoresIniciales();
 	return 0;
 } 
+
 void valoresIniciales(){
 	system("cls");
 	int opcion;
+	OcultarCursor();
 	menu();
+	
+	gotoxy(10,21);
+	cout<<" ---------"<<endl;
+	gotoxy(10,22);
+	cout<<"|         |"<<endl;
+	gotoxy(10,23);
+	cout<<" ---------"<<endl;
+	
+	gotoxy(15,22);
 	cin>>opcion;
 	opcionSeleccionada(opcion);
 }
+
 void opcionSeleccionada(int op){
 	switch(op){
 		case 1:
@@ -77,28 +119,107 @@ void opcionSeleccionada(int op){
 			 Eliminar();
 		break;
 		default:
-			cout<<"Opcion no valida";
+		
+			gotoxy(34,21);
+			cout<<" ------------------"<<endl;
+			gotoxy(34,22);
+			cout<<"| Opcion no valida |";
+			gotoxy(34,23);
+			cout<<" ------------------"<<endl;
+		
+		
 		break;
 	}
 }
+
 void menu(){
-	cout<<"Bienvenido a mi Programa"<<endl;
-	cout<<"Seleccione entre las siguientes opciones"<<endl;
-	cout<<"1.Ingresar Marca"<<endl;
-	cout<<"2.Modificar Marca"<<endl;
-	cout<<"3.Eliminar"<<endl;
+	gotoxy(10,4);
+	cout<<" ---------------------------------------------------------------------------------------"<<endl;
+	gotoxy(10,5);
+	cout<<"|                                                                        	           |"<<endl;
+	gotoxy(10,6);
+	cout<<"|                         Bienvenido a nuestra seleccion de marca                       |"<<endl;
+	gotoxy(10,7);
+	cout<<"|                                                                                       |"<<endl;
+	gotoxy(10,8);
+	cout<<" ---------------------------------------------------------------------------------------"<<endl;
+	
+	
+	gotoxy(10,15);
+	cout<<"--------------------------------------------"<<endl;
+	gotoxy(10,16);
+	cout<<"| Seleccione entre las siguientes opciones |"<<endl;
+	gotoxy(10,17);
+	cout<<"--------------------------------------------"<<endl;
+	
+	
+	gotoxy(81,15);
+	cout<<" -----------------"<<endl;
+	gotoxy(81,16);
+	cout<<"|1.Ingresar Marca |"<<endl;
+	gotoxy(81,17);            
+	cout<<" -----------------"<<endl;
+                             	
+	                          
+	gotoxy(81,18);           
+	cout<<" -----------------"<<endl;
+	gotoxy(81,19);             
+	cout<<"|2.Modificar Marca|"<<endl;
+	gotoxy(81,20);
+	cout<<" -----------------"<<endl;
+	
+	gotoxy(81,21);
+	cout<<" -----------------"<<endl;
+	gotoxy(81,22);
+	cout<<"|3.Eliminar       |"<<endl;
+	gotoxy(81,23);
+	cout<<" -----------------"<<endl;
+
+
+
+
 }
 void Ingresar(){
 	system("cls");
 	string codig,desc;
-	cout<<"Ingrese el codigo de la marca"<<endl;
-	cin>>codig;
-	cout<<"Ingrese el nombre de la marca"<<endl;
-	cin>>desc;
+	
+	
+	
+	gotoxy(5,5);
+	cout<<"------------------------------"<<endl;
+	gotoxy(5,6);
+	cout<<"|Ingrese el codigo de la marca|"<<endl;
+	gotoxy(5,7);
+	cout<<"-----------------------------"<<endl;
+	
+gotoxy(36,6);
+	cout<<">--->";   cin>>codig; 
+	
+	
+	gotoxy(5,9);
+	cout<<" -----------------------------"<<endl;
+	gotoxy(5,10);
+	cout<<"|Ingrese el nombre de la marca|"<<endl;
+	gotoxy(5,11);
+	cout<<" -----------------------------"<<endl;
+	
+	
+	gotoxy(36,10);
+	cout<<">--->"; cin>>desc;
+	cout<<" "<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
+	
+	
+	
 	//Funcion que verifica si es numero
+	system("cls");
 	if(esNumerico(codig)){
 		if(VeririficarRepetido(codig)){
-			cout<<"Error-- Ya ha utilizado este codigo"<<endl;
+			gotoxy(5,5);
+			cout<<" -------------------------------------------"<<endl;
+			gotoxy(5,6);
+			cout<<"|같같Error-- Ya ha utilizado este codigo같같|"<<endl;
+			gotoxy(5,7);
+			cout<<" -------------------------------------------"<<endl;
 			system("pause");
 			Ingresar();
 		}else{	
@@ -106,7 +227,12 @@ void Ingresar(){
 		}
 	}
 	else{
-		cout<<"Error-- el codigo debe ser numerico"<<endl;
+		gotoxy(5,5);
+		cout<<" -------------------------------------------"<<endl;
+		gotoxy(5,6);
+		cout<<"|같같Error-- el codigo debe ser numerico같같|"<<endl;
+		gotoxy(5,7);
+		cout<<" -------------------------------------------"<<endl;
 		system("pause");
 		Ingresar();
 	}
@@ -115,29 +241,76 @@ void Modificar(){
  system("cls");
  string codig,ncodig;
  mostrar();	
- cout<<"Ingrese el codigo que desea modificar"<<endl;
- cin>>codig;
- cout<<"Ingrese el nuevo nombre"<<endl;
- cin>>ncodig;
+
+gotoxy(5,5); 
+ cout<<" ---------------------------------------"<<endl;
+gotoxy(5,6); 
+ cout<<"| Ingrese el codigo que desea modificar |"<<endl;
+gotoxy(5,7); 
+ cout<<" ---------------------------------------"<<endl;
+
+gotoxy(46,6);
+cout<<">--->";cin>>codig;
+ 
+gotoxy(5,9); 
+ cout<<" -------------------------"<<endl;
+gotoxy(5,10); 
+ cout<<"| Ingrese el nuevo nombre |"<<endl;
+gotoxy(5,11); 
+ cout<<"--------------------------"<<endl;
+ 
+gotoxy(32,10);
+cout<<">--->"; cin>>ncodig;
+ 
+ 
+ 
  if(VeririficarRepetido(codig)){
  	mod(codig,ncodig);
  }else{
- 	cout<<"Error-- El codigo no existe"<<endl;
- 	system("pause");
+ 	
+	gotoxy(5,13);
+	cout<<"------------------------------"<<endl;	 
+	gotoxy(5,14);
+	cout<<"| Error-- El codigo no existe |"<<endl;
+ 	gotoxy(5,15);
+	 cout<<"-----------------------------"<<endl;
+	 system("pause");
 	Modificar();
+ 
+
+ 
  } 
 }
+
+//eliminar
 void Eliminar(){
  system("cls");
  string codig;
  mostrar();	
- cout<<"Ingrese el codigo que desea eliminar"<<endl;
- cin>>codig;
+ 
+ gotoxy(5,5); 
+ cout<<"---------------------------------------"<<endl;
+ gotoxy(5,6); 
+ cout<<"| Ingrese el codigo que desea eliminar |"<<endl;
+gotoxy(5,7); 
+ cout<<"--------------------------------------"<<endl;
+ 
+ gotoxy(45,6); 
+ cout<<">--->";cin>>codig;
+ 
+ 
  if(VeririficarRepetido(codig)){
  	eli(codig);
  }else{
- 	cout<<"Error-- El codigo no existe"<<endl;
- 	system("pause");
+ 	
+	gotoxy(5,9); 
+	cout<<"------------------------------------";
+	gotoxy(5,10); 	
+	cout<<"|같같Error-- El codigo no existe같같|"<<endl;
+ 	gotoxy(5,11); 
+	 cout<<"-----------------------------------";
+	 
+	 system("pause");
 	Modificar();
  } 	
 }
@@ -154,9 +327,26 @@ void ingresar_marcaArchivo(string cod,string desc){
 	fflush(stdin);
 	system("cls");
 	archivo<<endl<<cod<<" "<<desc;
-	cout<<"Registro Guardado exitosamente"<<endl;
-	cout<<"풠ontinuar s/n?"<<endl;
-	cin>>continuar;
+	
+	gotoxy(5,6);
+	cout<<" --------------------------------"<<endl;
+	gotoxy(5,7);
+	cout<<"| Registro Guardado exitosamente |"<<endl;
+	gotoxy(5,8);
+	cout<<" --------------------------------"<<endl<<endl;
+	
+	gotoxy(5,10);
+	cout<<"------------------"<<endl;
+	gotoxy(5,11);
+	cout<<"| 풠ontinuar s/n? |"<<endl;
+	gotoxy(5,12);
+	cout<<"------------------"<<endl;
+	
+	gotoxy(25,11);
+	cout<<">--->";cin>>continuar;
+	
+	
+	
 	archivo.close();
 		if(continuar=='s'||continuar=='S'){
 			Ingresar();		
@@ -239,7 +429,9 @@ void mostrar(){
 	string contenido;
 	archivo.open(nombre_archivo,ios::in);
 	if(archivo.fail()){
+		cout<<"-----------------"<<endl;
 		cout<<"Error de archivo"<<endl;
+		cout<<"-----------------"<<endl;
 		exit(1);
 	}else{
 		while(archivo.eof()==false){
@@ -248,12 +440,14 @@ void mostrar(){
 				getline(archivo,contenido);
 			    if(contenido=="" || contenido==" "){
 				}else{
-				cout<<contenido<<endl;
+					
+				cout<<"|--  "<<contenido<<"  --|"<<endl;
 				}
 				}
 		}
 		//va a hacer en todas las filas del archivo
 }
+
 void mod(string cod, string desc){
 	ofstream aux;
 	ifstream archivo;
@@ -284,12 +478,21 @@ void mod(string cod, string desc){
 		aux.close();
 		remove(nombre_archivo);
 		rename(nombre_auxiliar,nombre_archivo);
-		cout<<"Registro Modificado de forma exitosa"<<endl<<endl<<endl;
+		
+		gotoxy(5,6);
+		cout<<" --------------------------------------"<<endl;
+		gotoxy(5,7);
+		cout<<"| Registro Modificado de forma exitosa |"<<endl;
+		gotoxy(5,8);
+		cout<<" --------------------------------------"<<endl;
+		
+		
 		mostrar();	
 		system("pause");
 		valoresIniciales();
 	}
 } 
+
 void eli(string cod){
 	ofstream aux;
 	ifstream archivo;
@@ -320,7 +523,15 @@ void eli(string cod){
 		aux.close();
 		remove(nombre_archivo);
 		rename(nombre_auxiliar,nombre_archivo);
-		cout<<"Registro Eliminado de forma exitosa"<<endl<<endl<<endl;
+		
+		gotoxy(5,6);
+		cout<<" -------------------------------------"<<endl;
+		gotoxy(5,7);
+		cout<<"| Registro Eliminado de forma exitosa |"<<endl<<endl<<endl;
+		gotoxy(5,8);
+		cout<<" -------------------------------------"<<endl;
+		
+		
 		system("pause");
 		mostrar();
 		valoresIniciales();

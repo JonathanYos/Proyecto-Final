@@ -15,6 +15,25 @@ const char *nombre_auxiliar="../Base de Datos/MarcasAux.txt";
 const char *nombre_archivopro="../Base de Datos/Productos.txt";
 const char *nombre_auxiliarpro="../Base de Datos/ProductosAux.txt";
 
+void gotoxy(int x,int y){  
+      HANDLE hcon;  
+      hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
+      COORD dwPos;  
+      dwPos.X = x;  
+      dwPos.Y= y;  
+      SetConsoleCursorPosition(hcon,dwPos);  
+ 	}  
+
+void OcultarCursor()
+{
+	HANDLE hCon;
+	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor;
+	cursor.dwSize = 50;
+	cursor.bVisible = FALSE;
+	SetConsoleCursorInfo(hCon,&cursor);
+}
+
 void mostrar();
 void valoresIniciales();
 void menu();
@@ -67,17 +86,31 @@ int Cuenta(string s, const char Separadorr, int &TotalChars) {
 }
 
 int main(){
+	system ("color 70");
 	valoresIniciales();
 	return 0;
 }
+
+
 void valoresIniciales()
 {
 	system("cls");
 	int opcion;
+	OcultarCursor();
 	menu();
+	
+	gotoxy(10,21);
+	cout<<" ---------"<<endl;
+	gotoxy(10,22);
+	cout<<"|         |"<<endl;
+	gotoxy(10,23);
+	cout<<" ---------"<<endl;
+	
+	gotoxy(15,22);
 	cin>>opcion;
 	opcionSeleccionada(opcion);
 }
+
 void opcionSeleccionada(int op)
 {
 	switch(op){
@@ -91,17 +124,62 @@ void opcionSeleccionada(int op)
 			 Eliminar();
 		break;
 		default:
-			cout<<"Opcion no valida";
+			
+			
+			gotoxy(34,21);
+			cout<<" ------------------"<<endl;
+			gotoxy(34,22);
+			cout<<"| Opcion no valida |";
+			gotoxy(34,23);
+			cout<<" ------------------"<<endl;
+		
+		
 		break;
 	}
 }
+
 void menu()
 {
-	cout<<"Bienvenido a mi Programa"<<endl;
-	cout<<"Seleccione entre las siguientes opciones"<<endl;
-	cout<<"1.Ingresar Producto"<<endl;
-	cout<<"2.Modificar Producto"<<endl;
-	cout<<"3.Eliminar Producto"<<endl;
+	gotoxy(10,4);
+	cout<<" ---------------------------------------------------------------------------------------"<<endl;
+	gotoxy(10,5);
+	cout<<"|                                                                        	          |"<<endl;
+	gotoxy(10,6);
+	cout<<"|                         Bienvenido a nuestra seleccion de productos                   |"<<endl;
+	gotoxy(10,7);
+	cout<<"|                                                                                       |"<<endl;
+	gotoxy(10,8);
+	cout<<" ---------------------------------------------------------------------------------------"<<endl;
+	
+	gotoxy(10,15);
+	cout<<"--------------------------------------------"<<endl;
+	gotoxy(10,16);
+	cout<<"| Seleccione entre las siguientes opciones |"<<endl;
+	gotoxy(10,17);
+	cout<<"--------------------------------------------"<<endl;
+	
+	
+	gotoxy(81,15);
+	cout<<" --------------------"<<endl;
+	gotoxy(81,16);
+	cout<<"|1.Ingresar producto |"<<endl;
+	gotoxy(81,17);            
+	cout<<" -------------------"<<endl;
+                             	
+	                          
+	gotoxy(81,18);           
+	cout<<" ---------------------"<<endl;
+	gotoxy(81,19);             
+	cout<<"|2.Modificar producto |"<<endl;
+	gotoxy(81,20);
+	cout<<" ---------------------"<<endl;
+	
+	gotoxy(81,21);
+	cout<<" ---------------------"<<endl;
+	gotoxy(81,22);
+	cout<<"|3.Eliminar  producto |"<<endl;
+	gotoxy(81,23);
+	cout<<" ---------------------"<<endl;
 }
 
 void Ingresar()
@@ -120,33 +198,167 @@ void Ingresar()
 	
 	strftime(date_string, 50, "%d/%m/%y-%X", curr_tm);	
 	
-	cout<<"Ingrese el codigo del producto"<<endl;
+	
+	gotoxy(5,3);
+	cout<<" -------------------------------"<<endl;
+	gotoxy(5,4);
+	cout<<"|Ingrese el codigo del producto |"<<endl;
+	gotoxy(5,5);
+	cout<<"--------------------------------"<<endl;
+	
+	
+	gotoxy(5,6);
+	cout<<" ----------"<<endl;
+	gotoxy(5,7);
+	cout<<"|           |"<<endl;
+	gotoxy(5,8);
+	cout<<" ----------"<<endl;
+	
+	gotoxy(10,7);
 	cin>>codig;
-	cout<<"Ingrese el nombre del producto"<<endl;
+	
+	
+	
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*//	
+	
+	
+	gotoxy(5,9);
+	cout<<"--------------------------------"<<endl;
+	gotoxy(5,10);
+	cout<<"|Ingrese el nombre del producto |"<<endl;
+	gotoxy(5,11);
+	cout<<"--------------------------------"<<endl;
+	
+	
+	gotoxy(5,12);
+	cout<<" ----------"<<endl;
+	gotoxy(5,13);
+	cout<<"|           |"<<endl;
+	gotoxy(5,14);
+	cout<<" ----------"<<endl;
+	
+	gotoxy(10,13);
 	cin>>desc;
-	cout<<"Ingrese el codigo de la marca"<<endl;
+
+
+
+
+
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*//
+
+
+
+
+	gotoxy(5,15);
+	cout<<"--------------------------------"<<endl;
+	gotoxy(5,16);
+	cout<<"|Ingrese el codigo de la marca  |"<<endl;
+	gotoxy(5,17);
+	cout<<"--------------------------------"<<endl;
+	
+	
+	
+	gotoxy(5,18);
+	cout<<" -----------"<<endl;
+	gotoxy(5,19);
+	cout<<"|            |"<<endl;
+	gotoxy(5,20);
+	cout<<" -----------"<<endl;
+	
+	
+	gotoxy(10,19);
 	cin>>idmarca;
-	cout<<"Ingrese el precio de compra"<<endl<<"Q";
+
+
+
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*//
+
+
+
+
+	gotoxy(5,21);
+	cout<<"--------------------------------"<<endl;
+	gotoxy(5,22);
+	cout<<"|Ingrese el precio de compra    |"<<endl;
+	gotoxy(5,23);
+	cout<<"--------------------------------"<<endl;
+	
+	
+	
+	gotoxy(5,24);
+	cout<<" -----------"<<endl;
+	gotoxy(5,25);
+	cout<<"|Q           |"<<endl;
+	gotoxy(5,26);
+	cout<<" -----------"<<endl;
+	
+	gotoxy(10,25);
 	cin>>precioc;
-	cout<<"Ingrese el precio de venta"<<endl<<"Q";
+	
+	
+	
+	
+	
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--**-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*//	
+	
+	
+	
+	
+	gotoxy(5,27);
+	cout<<"--------------------------------"<<endl;
+	gotoxy(5,28);
+	cout<<"|Ingrese el precio de venta     |"<<endl;
+	gotoxy(5,29);
+	cout<<"--------------------------------"<<endl;
+	
+	
+	
+	
+	
+	gotoxy(5,30);
+	cout<<" -----------"<<endl;
+	gotoxy(5,31);
+	cout<<"|Q           |"<<endl;
+	gotoxy(5,32);
+	cout<<" -----------"<<endl;
+
+	gotoxy(10,31);
 	cin>>preciov;
+	
+	
 	//Funcion que verifica si es numero
 	if(esNumerico(codig)){
-		if(VeririficarRepetido(codig)==false){
-			cout<<"Error-- Ya ha utilizado este codigo"<<endl;
+		if(VeririficarRepetido(codig)){
+			
+			gotoxy(5,34);
+			cout<<" -------------------------------------------"<<endl;
+			gotoxy(5,35);
+			cout<<"|같같Error-- Ya ha utilizado este codigo같같|"<<endl;
+			gotoxy(5,36);
+			cout<<" -------------------------------------------"<<endl;
+			
 			system("pause");
 			Ingresar();
 		}else{	
 		if(Existe(idmarca)){
-		//cout<<s;
 		IngresarDb(codig,desc,idmarca,precioc,preciov,date_string);
 		}else{
-			cout<<"Error-- No existe la marca"<<endl;	
+			gotoxy(5,34);
+			cout<<" -------------------------------------------"<<endl;
+			gotoxy(5,35);
+			cout<<"|같같    Error-- No existe la marca     같같|"<<endl;	
+			gotoxy(5,36);
+			cout<<" -------------------------------------------"<<endl;
 		} 
 		}
 	}
 	else{
-		cout<<"Error-- el codigo debe ser numerico"<<endl;
+		gotoxy(5,34);
+		cout<<" -------------------------------------------"<<endl;
+		gotoxy(5,35);
+		cout<<"|같같Error-- el codigo debe ser numerico같같|"<<endl;
+		gotoxy(5,36);
+		cout<<" -------------------------------------------"<<endl;
 		system("pause");
 		Ingresar();
 	}
@@ -163,10 +375,27 @@ ofstream archivo;
 	fflush(stdin);
 	system("cls");
 	archivo<<endl<<cod<<" "<<des<<" "<<idm<<" "<<prec<<" "<<prev<<" "<<time;
-	cout<<"Registro Guardado exitosamente"<<endl;
+		gotoxy(5,6);
+	cout<<" --------------------------------"<<endl;
+	gotoxy(5,7);
+	cout<<"| Registro Guardado exitosamente |"<<endl;
+	gotoxy(5,8);
+	cout<<" --------------------------------"<<endl<<endl;
 	mostrarProducto();
-	cout<<"풠ontinuar s/n?"<<endl;
-	cin>>continuar;
+	
+	gotoxy(5,10);
+	cout<<"------------------"<<endl;
+	gotoxy(5,11);
+	cout<<"| 풠ontinuar s/n? |"<<endl;
+	gotoxy(5,12);
+	cout<<"------------------"<<endl;
+	
+	
+	gotoxy(25,11);
+	cout<<">--->";cin>>continuar;
+	
+	
+	
 	archivo.close();
 		if(continuar=='s'||continuar=='S'){
 			Ingresar();		
@@ -182,22 +411,36 @@ void Eliminar(){
 	float precioc,preciov;
 	
  	mostrarProducto();
- 	cout<<"Ingrese el codigo que desea modificar"<<endl;
+ 	
+ 	gotoxy(5,3);
+ 	cout<<" ---------------------------------------"<<endl;
+ 	gotoxy(5,4);
+	cout<<"| Ingrese el codigo que desea eliminar |"<<endl;
+	gotoxy(5,5);
+	cout<<" ---------------------------------------"<<endl;
+	
+	gotoxy(5,7);
+	cout<<" ------------"<<endl;
+	gotoxy(5,8);
+	cout<<"|            |"<<endl;
+	gotoxy(5,9);
+	cout<<" -----------"<<endl;
+	gotoxy(10,8);
 	cin>>codig;
  	
 	
- if(Existe(codig)){
- 	if(VeririficarRepetido(idmarca)){
+ if(VeririficarRepetido(codig)){
+ 
  		eli(codig);
-	 }
-	 else{
-	 	cout<<"ERROR-- La marca no existe";
-	 	system("pause");
-		Eliminar();
-	 }
+	 
  }else{
- 	cout<<"Error-- El codigo no existe"<<endl;
- 	system("pause");
+ 	gotoxy(5,11);
+	cout<<"------------------------------------"<<endl;
+ 	gotoxy(5,12);
+	cout<<"|같같Error-- El codigo no existe같같|"<<endl;
+ 	gotoxy(5,13);
+	cout<<"------------------------------------"<<endl;
+	 system("pause");
 	Eliminar();
  } 
 }
@@ -231,7 +474,9 @@ void eli(string cod){
 		aux.close();
 		remove(nombre_archivopro);
 		rename(nombre_auxiliarpro,nombre_archivopro);
-		cout<<"Registro Eliminado de forma exitosa"<<endl<<endl<<endl;
+		cout<<" ----------------------------------"<<endl;
+		cout<<"|Registro Eliminado de forma exitosa|"<<endl<<endl<<endl;
+		cout<<" -----------------------------------"<<endl;
 		system("pause");
 		mostrarProducto();
 		valoresIniciales();
@@ -319,27 +564,121 @@ void Modificar(){
 	
 	strftime(date_string, 50, "%d/%m/%y-%X", curr_tm);
  mostrarProducto();
- 	cout<<"Ingrese el codigo que desea modificar"<<endl;
+ 	
+ 	
+ 	gotoxy(5,3);
+	cout<<"--------------------------------------"<<endl;
+	gotoxy(5,4);
+	cout<<"|Ingrese el codigo que desea modificar|"<<endl;
+	gotoxy(5,5);
+	cout<<"--------------------------------------"<<endl;
+	
+	gotoxy(5,6);
+	cout<<" ------------"<<endl;
+	gotoxy(5,7);
+	cout<<"|            |"<<endl;
+	gotoxy(5,8);
+	cout<<" -----------"<<endl;
+	gotoxy(10,7);
 	cin>>codig;
- 	cout<<"Ingrese el nuevo nombre"<<endl;
- 	cin>>desc;
- 	cout<<"Ingrese el codigo de la marca"<<endl;
+ 	
+ 	
+ 	
+	gotoxy(5,9);
+	cout<<"--------------------------------------"<<endl;
+	gotoxy(5,10);
+	cout<<"|Ingrese el nuevo nombre              |"<<endl;
+ 	gotoxy(5,11);
+	cout<<"--------------------------------------"<<endl;
+	
+	
+	gotoxy(5,12);
+	cout<<" ------------"<<endl;
+	gotoxy(5,13);
+	cout<<"|            |"<<endl;
+	gotoxy(5,14);
+	cout<<" -----------"<<endl;
+	gotoxy(10,13);
+	cin>>desc;
+ 	
+ 	
+ 	
+	gotoxy(5,15); 
+	cout<<"--------------------------------------"<<endl;
+	gotoxy(5,16);
+	cout<<"|Ingrese el codigo de la marca        |"<<endl;
+	gotoxy(5,17);
+	cout<<"--------------------------------------"<<endl;
+	
+	
+	
+	gotoxy(5,18);
+	cout<<" ------------"<<endl;
+	gotoxy(5,19);
+	cout<<"|            |"<<endl;
+	gotoxy(5,20);
+	cout<<" -----------"<<endl;
+	gotoxy(10,19);
 	cin>>idmarca;
-	cout<<"Ingrese el precio de compra"<<endl<<"Q";
+	
+	
+	
+	gotoxy(5,21);
+	cout<<"--------------------------------------"<<endl;
+	gotoxy(5,22);
+	cout<<"|Ingrese el precio de compra          |"<<endl;
+	gotoxy(5,23);
+	cout<<"--------------------------------------"<<endl;
+	
+	
+	
+	gotoxy(5,24);
+	cout<<" ------------"<<endl;
+	gotoxy(5,25);
+	cout<<"|Q           |"<<endl;
+	gotoxy(5,26);
+	cout<<" -----------"<<endl;
+	gotoxy(10,25);
 	cin>>precioc;
-	cout<<"Ingrese el precio de venta"<<endl<<"Q";
+	
+	
+	
+	gotoxy(5,27);
+	cout<<"--------------------------------------"<<endl;
+	gotoxy(5,28);
+	cout<<"|Ingrese el precio de venta           |"<<endl;
+	gotoxy(5,29);
+	cout<<"--------------------------------------"<<endl;
+	
+	gotoxy(5,30);
+	cout<<" ------------"<<endl;
+	gotoxy(5,31);
+	cout<<"|Q           |"<<endl;
+	gotoxy(5,32);
+	cout<<" -----------"<<endl;
+	gotoxy(10,31);
 	cin>>preciov;
 	
- if(Existe(codig)){
- 	if(VeririficarRepetido(idmarca)){
+ if(VeririficarRepetido(codig)){
+ 	if(Existe(idmarca)){
  		mod(codig,desc,idmarca,precioc,preciov,date_string);
 	 }
 	 else{
-	 	cout<<"ERROR-- La marca no existe";
+	 	gotoxy(5,33);
+	 	cout<<" ----------------------------------"<<endl;
+	 	gotoxy(5,34);
+		cout<<"|같같ERROR-- La marca no existe같같|";
+		gotoxy(5,35);
+		cout<<" ----------------------------------"<<endl;	 
 	 }
  }else{
- 	cout<<"Error-- El codigo no existe"<<endl;
- 	system("pause");
+ 	gotoxy(5,33);
+ 	cout<<" -----------------------------------"<<endl;
+ 	gotoxy(5,34);
+	cout<<"|같같Error-- El codigo no existe같같|"<<endl;
+ 	gotoxy(5,35);
+	 cout<<" -----------------------------------"<<endl;
+	 system("pause");
 	Modificar();
  } 
 }
@@ -347,7 +686,7 @@ bool Existe(string codi){
 	int conteo;
 	ifstream archivo;
 	string contenido;
-	archivo.open(nombre_archivopro,ios::in);
+	archivo.open(nombre_archivo,ios::in);
 	if(archivo.fail()){
 		cout<<"Error de archivo"<<endl;
 		exit(1);
@@ -456,7 +795,9 @@ void mod(string cod, string des,string idm,float prec, float prev,char const * t
 		aux.close();
 		remove(nombre_archivopro);
 		rename(nombre_auxiliarpro,nombre_archivopro);
-		cout<<"Registro Modificado de forma exitosa"<<endl<<endl<<endl;
+		cout<<" ------------------------------------"<<endl;
+		cout<<"|Registro Modificado de forma exitosa|"<<endl<<endl<<endl;
+		cout<<" ------------------------------------"<<endl;
 		mostrarProducto();	
 		system("pause");
 		valoresIniciales();
